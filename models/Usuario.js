@@ -16,4 +16,12 @@ const UsuarioSchema = Schema({
     }
 });
 
+// Modificar el objecto retornado
+UsuarioSchema.method('toJSON', function(){
+    const { __v, _id, ...object } = this.toObject(); // Se saca las 2 primeras propiedades y se hace un spread del resto
+    object.uid = _id;
+    return object;
+
+})
+
 module.exports = model('Usuario', UsuarioSchema );
